@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet  author="andre"  id="tabels">
+        <createTable tableName="storeuser">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column  name="company_name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="registration_nr"  type="numeric">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="vat_number" type="varchar(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_address" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="contact_name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="email"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable  tableName="spare_parts">
+            <column  name="id"  type="int" autoIncrement="true">
+                <constraints  nullable="false"  primaryKey="true"/>
+            </column>
+            <column  name="part_number"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="part_name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="part_description"  type="text">
+                <constraints  nullable="true"/>
+            </column>
+            <column  name="quantity"  type="int">
+                <constraints  nullable="true"/>
+            </column>
+            <column  name="price"  type="numeric">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="wh_address"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="shopping_cart">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column  name="part_id"  type="int">
+                <constraints foreignKeyName="fk_shopping_cart_spare_parts" nullable="false" references="spare_parts(id)"/>
+            </column>
+            <column  name="part_number"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="part_name"  type="text">
+                <constraints  nullable="false"/>
+            </column>
+            <column  name="quantity"  type="numeric">
+                <constraints nullable="false" />
+            </column>
+            <column  name="price"  type="numeric">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

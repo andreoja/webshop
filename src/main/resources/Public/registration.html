@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uue kliendi registreerimine</title>
+</head>
+<body>
+<h1> Registreeru kliendiks</h1>
+<div>
+    <label> Ettevõtte nimi</label>
+    <input id="company_name" type="text" placeholder="Ettevõtte nimi"/>
+</div>
+<div>
+    <label> Ettevõtte registreerimis number</label>
+    <input id="registration_nr" type="text" placeholder="Ettevõtte reg.nr"/>
+</div>
+<div>
+    <label> Ettevõtte KMKR</label>
+    <input id="VAT_number" type="text" placeholder="KMKR number"/>
+</div>
+<div>
+    <label> Ettevõtte aadress</label>
+    <input id="company_address" type="text" placeholder="Aadress"/>
+</div>
+<div>
+    <label> Kontakt isik</label>
+    <input id="contact_name" type="text" placeholder="Kontakt isik"/>
+</div>
+<div>
+    <label> Salasõna</label>
+    <input id="password" type="password" name="password" placeholder="salasõna"/>
+</div>
+<div>
+    <label> E-mail</label>
+    <input id="email" type="email" placeholder="Email"/>
+</div>
+
+<button id="registerUser" type="button">Registreeri kasutaja</button>
+<script>
+    let button = document.getElementById("registerUser");
+    let compName = document.getElementById("company_name");
+    let registration = document.getElementById("registration_nr");
+    let VAT = document.getElementById("VAT_number");
+    let company = document.getElementById("company_address");
+    let contact = document.getElementById("contact_name");
+    let password = document.getElementById("password");
+    let email = document.getElementById("email");
+    button.addEventListener('click', function(){
+        fetch('/addclient', {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                companyName: compName.value,
+                registrationNumber: registration.value,
+                companyVat: VAT.value,
+                companyAddress: company.value,
+                contactName: contact.value,
+                password: password.value,
+                email: email.value
+            })
+        })
+            .then(function(response) {
+                alert("Tere tulemast");
+                window.location.href = "webshop.html";
+            })
+
+            .catch(function(err) {
+                alert("Midagi läks valesti");
+            });
+    })
+</script>
+</body>
+</html>
